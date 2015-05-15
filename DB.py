@@ -57,15 +57,15 @@ class Tweets:
             print("insert : {}".format(err))
         finally:
             cursor.close()
-    def get_tweets_wo_place(self):
+    def get_tweets_wo_sentiment(self):
+        cursor = self.dbo.cnx.cursor()
         try:
-            cursor = self.dbo.cnx.cursor()
-            cursor.execute("SELECT * FROM Tweets WHERE place is null")
+            cursor.execute("SELECT * FROM Tweets WHERE sentiment is null")
             tweets = Set()
             for tweet in cursor:
                 tweets.add(tweet)
         except mysql.connector.Error as err:
-            print("get_tweets_wo_place: {}".format(err))
+            print("get_tweets_wo_sentiment: {}".format(err))
         finally:
             cursor.close()
         return tweets
